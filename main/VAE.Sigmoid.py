@@ -60,14 +60,14 @@ from keras.utils.vis_utils import model_to_dot
 print(keras.__version__)
 tf.__version__
 
-work_dir = sys.argv[2]
-train_file_path = sys.argv[3] #ccle.zeroone_5000_0.2.tsv
-val_file_1_path = sys.argv[4] #PANCAN.zeroone_5000_0.2.tsv
-train_latent_file = sys.argv[5] #CCLE_latent_5000_0.2.tsv
-train_weight_file = sys.argv[6] #CCLE_gene_weights_5000_0.2.tsv
-val_1_pred_file = sys.argv[7] #PANCAN_prediction_5000_0.2.tsv
-encoder_file = sys.argv[8] # CCLE_encoder_onehidden_vae.hdf5
-decoder_file = sys.argv[9] # CCLE_decoder_onehidden_vae.hdf5
+work_dir = r"C:\Users\cluss\OneDrive\Desktop\Programing Projects\VAEN" #sys.argv[2]
+train_file_path = "ccle.zeroone_5000_0.2.tsv" #sys.argv[3] #
+val_file_1_path = "PANCAN.zeroone_5000_0.2.tsv" #sys.argv[4] #
+train_latent_file = "CCLE.latent.tsv" #sys.argv[5] #
+train_weight_file = "CCLE.weight.tsv" #sys.argv[6] #
+val_1_pred_file = "PANCAN_prediction_5000_0.2.tsv" #sys.argv[7] #
+encoder_file =  "CCLE_encoder_onehidden_vae.hdf5" #sys.argv[8] #
+decoder_file = "CCLE_decoder_onehidden_vae.hdf5" # sys.argv[9] #
 
 print ("work_dir: %s" % work_dir)
 
@@ -128,7 +128,7 @@ test_set_percent = 0.1
 rnaseq_test_df = rnaseq_df.sample(frac=test_set_percent)
 rnaseq_train_df = rnaseq_df.drop(rnaseq_test_df.index)
 
-
+# Initializing variables
 original_dim = rnaseq_df.shape[1]
 latent_dim = 100
 
@@ -155,7 +155,7 @@ z = Lambda(sampling, output_shape=(latent_dim, ))([z_mean_encoded, z_log_var_enc
 
 drop_layer = Dropout(rate = 0.2, noise_shape = None)(z)			####### modified added
 
-decoder_to_reconstruct = Dense(original_dim, kernel_initializer='glorot_uniform', activation='sigmoid')
+decoder_to_reconstruct = nDese(original_dim, kernel_initializer='glorot_uniform', activation='sigmoid')
 
 rnaseq_reconstruct = decoder_to_reconstruct(drop_layer)			####### modified
 
